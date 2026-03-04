@@ -11,5 +11,15 @@ RWStructuredBuffer<ParticleData> particleBuffer;
 [numthreads(1024,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    particleBuffer[id.x].position = particleBuffer[id.x].position + float3(0, 0.01, 0);
+    float sigma = 10;
+    float rho = 28;
+    float beta = 8.0f/3.0f;
+    
+    float3 prevPos = particleBuffer[id.x].position;
+    float3 vel;
+    vel.x = sigma * (prevPos.y - prevPos.x);
+    vel.y = prevPos.x * (rho - prevPos.z) - prevPos.y;
+    vel.z = prevPos.x * prevPos.y - beta * prevPos.z;
+    
+    particleBuffer[id.x].position += vel * 0.016;
 }

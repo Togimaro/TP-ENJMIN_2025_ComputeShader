@@ -12,7 +12,7 @@ public class ParticleRenderData : ContextItem {
 }
 
 public class ParticleRenderFeature : ScriptableRendererFeature {
-    const int NUM_PARTICLE = 4096;
+    const int NUM_PARTICLE = 0x8000;
 
     [SerializeField]
     ComputeShader updateComputeShader;
