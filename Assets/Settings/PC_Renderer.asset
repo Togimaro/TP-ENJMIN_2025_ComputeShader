@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   updateComputeShader: {fileID: 7200000, guid: 7934c9ff077e2154abd1da21c89b68a0, type: 3}
-  particleMaterial: {fileID: 0}
+  particleMaterial: {fileID: 2100000, guid: 10ecf44a180041940bbb1e7e77f91b95, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +42,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
   - {fileID: -3966531454146022215}
-  m_RendererFeatureMap: ad6b866f10d7b46cb9743675a80cf4c8
+  - {fileID: 5899788686456846958}
+  m_RendererFeatureMap: ad6b866f10d7b46cb9743675a80cf4c86efa204a8d42e051
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -68,6 +69,21 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
+--- !u!114 &5899788686456846958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df361dd9dfa45b4c81f9c5b9c809fde, type: 3}
+  m_Name: TextureWriteFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  textureWriteComputeShader: {fileID: 7200000, guid: 53c3648651644ac468520b79597b21bb, type: 3}
+  rt: {fileID: 8400000, guid: de0b858a5ea18e145a0aaa00fc44c355, type: 2}
 --- !u!114 &7833122117494664109
 MonoBehaviour:
   m_ObjectHideFlags: 0
