@@ -29,19 +29,15 @@ Shader "RenderParticleShader"
             };
             StructuredBuffer<ParticleData> particleBuffer;
 
-            struct VertexInput {
-                float4 position : POSITION;
-            };
-
             struct VertexOutput {
                 float4 position : SV_POSITION;
             };
 
             float4 _Color;
 
-            VertexOutput vertexShader(VertexInput input) {
+            VertexOutput vertexShader(uint vertexId : SV_VertexID) {
                 VertexOutput o = (VertexOutput)0;
-                o.position = TransformObjectToHClip(input.position.xyz);
+                o.position = TransformObjectToHClip(particleBuffer[vertexId].position);
                 return o;
             }
 

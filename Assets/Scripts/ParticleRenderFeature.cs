@@ -12,6 +12,8 @@ public class ParticleRenderData : ContextItem {
 }
 
 public class ParticleRenderFeature : ScriptableRendererFeature {
+    const int NUM_PARTICLE = 4096;
+
     [SerializeField]
     ComputeShader updateComputeShader;
     [SerializeField]
@@ -20,17 +22,15 @@ public class ParticleRenderFeature : ScriptableRendererFeature {
     UpdateParticlePass updatePass;
     RenderParticlePass renderPass;
 
-    public override void Create()
-    {
-        updatePass = new UpdateParticlePass();
+    public override void Create() {
+        updatePass = new UpdateParticlePass(NUM_PARTICLE);
         updatePass.renderPassEvent = RenderPassEvent.BeforeRendering;
 
-        renderPass = new RenderParticlePass();
+        renderPass = new RenderParticlePass(NUM_PARTICLE);
         renderPass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
     }
 
-    public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
-    {
+    public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData) {
         updatePass.Setup(updateComputeShader);
         renderer.EnqueuePass(updatePass);
         renderPass.Setup(particleMaterial);
