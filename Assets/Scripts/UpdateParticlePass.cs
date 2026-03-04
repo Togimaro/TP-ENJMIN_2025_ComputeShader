@@ -14,6 +14,7 @@ public class UpdateParticlePass : ScriptableRenderPass {
 
     struct ParticleData {
         public Vector3 position;
+        public Vector3 velocity;
     };
 
     public UpdateParticlePass(int numParticles) {
@@ -59,6 +60,8 @@ public class UpdateParticlePass : ScriptableRenderPass {
         if (!Application.isPlaying || EditorApplication.isPaused) return;
         int kernelId = data.cs.FindKernel("CSMain");
         ctx.cmd.SetComputeBufferParam(data.cs, kernelId, "particleBuffer", data.particleBufferHandle);
+        ctx.cmd.SetComputeVectorParam(data.cs, "unity_DeltaTime", Shader.GetGlobalVector("unity_DeltaTime"));
+        ctx.cmd.SetComputeFloatParam(data.cs, "simulationSpeed", 0.1f);
 
         data.cs.GetKernelThreadGroupSizes(kernelId, out uint threadCountX, out uint threadCountY, out uint threadCountZ);
         ctx.cmd.DispatchCompute(data.cs, kernelId, (int)(data.numParticles / threadCountX), 1, 1);
