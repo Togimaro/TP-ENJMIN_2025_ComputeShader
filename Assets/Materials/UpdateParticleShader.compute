@@ -1,0 +1,15 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+struct ParticleData
+{
+    float3 position;
+};
+
+RWStructuredBuffer<ParticleData> particleBuffer;
+
+[numthreads(1024,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    particleBuffer[id.x].position = float3(id.x, 0, 0);
+}
